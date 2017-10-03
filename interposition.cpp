@@ -61,6 +61,8 @@ FORWARD_DECLARE(ssize_t, read, (int fd, void *buf, size_t count));
 FORWARD_DECLARE(ssize_t, pread, (int fd, void *buf, size_t count, off_t offset));
 FORWARD_DECLARE(ssize_t, pwrite, (int fd, const void *buf, size_t count, off_t offset));
 
+__attribute__ ((noreturn)) FORWARD_DECLARE(void, exit, (int status)) ;
+
 FORWARD_DECLARE(FILE *, fopen, (const char *path, const char *mode));
 
 #ifdef __cplusplus
@@ -169,6 +171,15 @@ DLL_PUBLIC ssize_t pwrite(int fd, const void *buf, size_t count, off_t offset) {
     ret = __real_pwrite(fd, buf, count, offset);
 
     return ret;
+}
+
+DLL_PUBLIC void exit(int status) {
+    MAP(exit, void (*)(int));
+
+    std::cout << "Intercepting a call to exit with status = \"" << status << '\"' << std::endl;
+    __real_exit(status);
+
+//    return;
 }
 
 DLL_PUBLIC FILE * fopen(const char *path, const char *mode) {
