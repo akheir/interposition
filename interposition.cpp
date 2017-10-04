@@ -1,4 +1,4 @@
-//  Copyright (c) 2017 Alireza Kheirkhahang
+//  Copyright (c) 2017 Alireza Kheirkhahan
 //
 //  Distributed under the Boost Software License, Version 1.0. (See accompanying
 //  file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -61,9 +61,9 @@ FORWARD_DECLARE(ssize_t, read, (int fd, void *buf, size_t count));
 FORWARD_DECLARE(ssize_t, pread, (int fd, void *buf, size_t count, off_t offset));
 FORWARD_DECLARE(ssize_t, pwrite, (int fd, const void *buf, size_t count, off_t offset));
 
-__attribute__ ((noreturn)) FORWARD_DECLARE(void, exit, (int status)) ;
+//__attribute__ ((noreturn)) FORWARD_DECLARE(void, exit, (int status)) ;
 
-FORWARD_DECLARE(FILE *, fopen, (const char *path, const char *mode));
+//FORWARD_DECLARE(FILE *, fopen, (const char *path, const char *mode));
 
 #ifdef __cplusplus
 extern "C" {
@@ -173,22 +173,22 @@ DLL_PUBLIC ssize_t pwrite(int fd, const void *buf, size_t count, off_t offset) {
     return ret;
 }
 
-DLL_PUBLIC void exit(int status) {
-    MAP(exit, void (*)(int));
-
-    std::cout << "Intercepting a call to exit with status = \"" << status << '\"' << std::endl;
-    __real_exit(status);
-
+//DLL_PUBLIC void exit(int status) {
+//    MAP(exit, void (*)(int));
+//
+//    std::cout << "Intercepting a call to exit with status = \"" << status << '\"' << std::endl;
+//    __real_exit(status);
+//
 //    return;
-}
+//}
 
-DLL_PUBLIC FILE * fopen(const char *path, const char *mode) {
-	MAP(fopen, FILE *(*)(const char *, const char *));
-
-	std::cout << "fopen: " << path << std::endl;
-
-	return __real_fopen(path, mode);
-}
+//DLL_PUBLIC FILE * fopen(const char *path, const char *mode) {
+//	MAP(fopen, FILE *(*)(const char *, const char *));
+//
+//	std::cout << "fopen: " << path << std::endl;
+//
+//	return __real_fopen(path, mode);
+//}
 
 #ifdef __cplusplus
 } //extern "C" {

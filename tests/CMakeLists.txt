@@ -10,3 +10,5 @@ set(SOURCE_FILES posix_tests.cpp)
 add_executable(posix_tests posix_tests.cpp)
 target_link_libraries (posix_tests LINK_PUBLIC interposition)
 
+add_executable(posix posix_tests.cpp)
+

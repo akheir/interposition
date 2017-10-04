@@ -16,6 +16,7 @@ extern "C" {
 
 #include <unistd.h>
 #include <fcntl.h>
+#include <stdio.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 
@@ -53,6 +54,8 @@ int main()
 
     ssize_t len = read(fd_, sp.get(), count);
     result.assign(sp.get(), sp.get() + len);
-    std::cout << result;
+    std::cout << result << std::endl;
+    printf("Hello World!\n");
+    
     return 0;
 }
